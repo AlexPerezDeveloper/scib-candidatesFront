@@ -22,21 +22,21 @@
             </tr>
         </thead>
         <tbody>
-            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let candidate of dummyCandidates">
                 <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                    Alex
+                    {{candidate.firstName}}
                 </th>
                 <td class="px-6 py-4">
-                    Perez
+                    {{candidate.lastName}}
                 </td>
                 <td class="px-6 py-4">
-                    Senior
+                    {{candidate.seniority}}
                 </td>
                 <td class="px-6 py-4">
-                    8
+                    {{candidate.years}}
                 </td>
                 <td class="px-6 py-4">
-                    Yes
+                    {{candidate.availability}}
                 </td>
             </tr>
             <tr class="border-b bg-gray-800 border-gray-700">
