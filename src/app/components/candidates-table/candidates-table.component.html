@@ -22,41 +22,23 @@
             </tr>
         </thead>
         <tbody>
-           <!-- <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let candidate of dummyCandidates">
-                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
+            <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700" *ngFor="let candidate of candidates">
+                <th class="px-6 py-4 text-center">
                     {{candidate.firstName}}
                 </th>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 text-center">
                     {{candidate.lastName}}
                 </td>
-                <td class="px-6 py-4">
-                    {{candidate.seniority}}
+                <td class="px-6 py-4 text-center">
+                    {{ candidate.seniority === 'junior' ? 'Junior Developer' : 'Senior Developer' }}
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 text-center">
                     {{candidate.years}}
                 </td>
-                <td class="px-6 py-4">
-                    {{candidate.availability}}
+                <td class="px-6 py-4 text-center">
+                    {{candidate.availability ? '✓' : 'X'}}
                 </td>
             </tr>
-            <tr class="border-b bg-gray-800 border-gray-700">
-                <th scope="row" class="px-6 py-4 font-medium whitespace-nowrap">
-                    Manuel
-                </th>
-                <td class="px-6 py-4">
-                    Soprano
-                </td>
-                <td class="px-6 py-4">
-                    Junior
-                </td>
-                <td class="px-6 py-4">
-                    1
-                </td>
-                <td class="px-6 py-4">
-                    No
-                </td>
-            </tr>-->
-            
         </tbody>
     </table>
 </div>

@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ApiFormService } from '../../services/api-form.service';
+import { StorageService } from '../../services/localstorage.service';
+import { LocalCandidate } from '../../interfaces/candidate';
 @Component({
   selector: 'app-candidates-form',
   standalone: true,
@@ -12,7 +14,7 @@ import { ApiFormService } from '../../services/api-form.service';
 export class CandidatesFormComponent {
   candidatesForm: FormGroup;
 
-  constructor(private apiFormService: ApiFormService){
+  constructor(private apiFormService: ApiFormService, private storageService: StorageService){
     this.candidatesForm = new FormGroup({
       firstName: new FormControl('', [Validators.required]),
       lastName: new FormControl('', [Validators.required]),
@@ -21,8 +23,8 @@ export class CandidatesFormComponent {
   }
   onSubmit() {
     const formData = new FormData();
-    formData.append('name', this.candidatesForm.get('firstName')?.value);
-    formData.append('surname', this.candidatesForm.get('lastName')?.value);
+    formData.append('firstName', this.candidatesForm.get('firstName')?.value);
+    formData.append('lastName', this.candidatesForm.get('lastName')?.value);
 
     const fileInput = this.candidatesForm.get('file')?.value as FileList;
     if (fileInput && fileInput.length > 0) {
@@ -34,13 +36,19 @@ export class CandidatesFormComponent {
 
     this.apiFormService.postData(formData).subscribe({
       next: (response) => {
-        console.log(response)
+        //console.log(response);
+        this.addLocalCandidate(response);
         this.candidatesForm.reset();
       },
       error: (error) => console.error(error),
       complete: () => console.log('Request complete')
     });
 
+  }
+
+  addLocalCandidate(response: LocalCandidate): void {
+    const newCandidate = response;
+    this.storageService.addCandidate(newCandidate);
   }
 
   onFileChange(event: Event) {
